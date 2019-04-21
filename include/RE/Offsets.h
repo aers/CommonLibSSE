@@ -255,6 +255,10 @@ namespace RE
 			constexpr std::uintptr_t InitContainer = 0x001E9D90;				// 1_5_73
 			// E8 ? ? ? ? 48 85 ED 74 3F
 			constexpr std::uintptr_t SendContainerChangedEvent = 0x001ECE20;	// 1_5_73
+            // E8 ? ? ? ? 48 8D 55 A7 49 8B CC 
+            constexpr std::uintptr_t ExecuteVisitor = 0x001E5190;               // 1_5_73
+            // E8 ? ? ? ? 0F B6 6C 24 ? 40 84 ED 
+            constexpr std::uintptr_t ExecuteVisitorOnWorn = 0x001E51D0;         // 1_5_73
 		}
 
 
@@ -459,6 +463,13 @@ namespace RE
 			constexpr std::uintptr_t Vtbl = 0x01557700;	// 1_5_73
 		}
 
+        namespace TESObjectARMO
+		{
+            // E8 ? ? ? ? FF C3 41 3B 5E 10 72 95 
+            constexpr std::uintptr_t ApplyArmorAddon = 0x00228AD0; // 1_5_73
+            // E8 ? ? ? ? 84 C0 0F 84 ? ? ? ? 48 8B CD E8 ? ? ? ? 4C 8B E0 48 8B D0 49 8B CE E8 ? ? ? ? 84 C0 0F 84 ? ? ? ? 48 8B D5 
+            constexpr std::uintptr_t TestBodyPartByIndex = 0x00228D60; // 1_5_73
+		}
 
 		namespace TESObjectCONT
 		{

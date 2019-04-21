@@ -12,10 +12,25 @@ namespace RE
 	class BaseExtraList;
 	class InventoryEntryData;
 
-
 	class InventoryChanges
 	{
 	public:
+        class IItemChangeVisitor
+        {
+        public:
+            enum class ReturnType : UInt32
+            {
+                kBreak,
+                kContinue
+            };
+
+            virtual ~IItemChangeVisitor() {}
+
+            virtual ReturnType  Visit(InventoryEntryData * a_entry) = 0;                                
+            virtual bool        Unk_02(UInt32 a_arg1, UInt32 a_arg2) { return true; }                   
+            virtual ReturnType  Unk_03(InventoryEntryData * a_entry, UInt32 a_arg2, bool &a_result) { a_result = true; return Visit(a_entry); }  
+        };
+
 		explicit InventoryChanges(TESObjectREFR* a_ref);
 
 		InventoryEntryData*	FindItemEntry(TESForm* a_item);
@@ -27,8 +42,10 @@ namespace RE
 		void				GenerateLeveledListChanges();
 		void				SendContainerChangedEvent(BaseExtraList* a_itemExtraList, TESObjectREFR* a_fromRefr, TESForm* a_item, SInt32 a_count);
 
-		TES_HEAP_REDEFINE_NEW();
+        void                ExecuteVisitor(IItemChangeVisitor * a_visitor);
+        void                ExecuteVisitorOnWorn(IItemChangeVisitor * a_visitor);
 
+		TES_HEAP_REDEFINE_NEW();
 
 		BSSimpleList<InventoryEntryData*>*	entryList;		// 00
 		TESObjectREFR*						owner;			// 08

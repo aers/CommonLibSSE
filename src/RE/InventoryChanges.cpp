@@ -75,6 +75,19 @@ namespace RE
 		return func(this, a_itemExtraList, a_fromRefr, a_item, a_count);
 	}
 
+    void InventoryChanges::ExecuteVisitor(IItemChangeVisitor * a_visitor)
+	{
+        using func_t = function_type_t<decltype(&InventoryChanges::ExecuteVisitor)>;
+        RelocUnrestricted<func_t*> func(Offset::InventoryChanges::ExecuteVisitor);
+        return func(this, a_visitor);
+	}
+
+    void InventoryChanges::ExecuteVisitorOnWorn(IItemChangeVisitor * a_visitor)
+    {
+        using func_t = function_type_t<decltype(&InventoryChanges::ExecuteVisitorOnWorn)>;
+        RelocUnrestricted<func_t*> func(Offset::InventoryChanges::ExecuteVisitorOnWorn);
+        return func(this, a_visitor);
+    }
 
 	InventoryChanges* InventoryChanges::Ctor_Internal(TESObjectREFR* a_ref)
 	{

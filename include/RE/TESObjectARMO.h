@@ -19,6 +19,8 @@
 
 namespace RE
 {
+    class ActorWeightModel;
+
 	class TESObjectARMO :
 		public TESBoundObject,				// 000
 		public TESFullName,					// 030
@@ -60,6 +62,8 @@ namespace RE
 		virtual void	CopyFrom(TESForm* a_srcForm) override;			// 2F
 
 		float			GetArmorRating();
+        bool            ApplyArmorAddon(TESRace * a_race, ActorWeightModel * a_model, bool a_isFemale);
+        bool            TestBodyPartByIndex(UInt32 a_index);
 
 
 		// members
