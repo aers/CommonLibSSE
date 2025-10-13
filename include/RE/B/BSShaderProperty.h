@@ -231,7 +231,7 @@ namespace RE
 		BSTSmartPointer<BSEffectShaderData>              effectData;           // 68
 		BSShaderPropertyLightData*                       lightData;            // 70
 		BSShaderMaterial*                                material;             // 78
-		std::uint64_t                                    unk80;                // 80
+		std::uint32_t                                    frameCount;           // 80
 	};
 	static_assert(sizeof(BSShaderProperty) == 0x88);
 }

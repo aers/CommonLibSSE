@@ -59,8 +59,8 @@ namespace RE
 		std::uint32_t    unk110;                    // 110
 		bool             unk114;                    // 114
 		NiColorA         silhouetteColor;           // 118
-		bool             firstPerson;               // 128
-		bool             unk129;                    // 129
+		bool             waterReflection;           // 128
+		bool             waterRefraction;           // 129
 		bool             unk12A;                    // 12A
 		bool             unk12B;                    // 12B
 		bool             drawDecals;                // 12C

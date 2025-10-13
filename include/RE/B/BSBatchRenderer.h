@@ -20,6 +20,18 @@ namespace RE
 		};
 		static_assert(sizeof(PersistentPassList) == 0x10);
 
+		enum GeometryGroupUsage
+		{
+			kLOD0 = 0,
+			kLOD1 = 1,
+			kOpaqueDecalsMode89 = 2, // refers to depth bias mode
+			kOpaqueDecalsMode67 = 3,
+			kBlendedDecals = 4,
+			kDepth5 = 5,
+			kDepth6 = 6,
+			kTotal = 16
+		};
+
 		struct GeometryGroup
 		{
 			BSBatchRenderer*   batchRenderer;  // 000
@@ -41,21 +53,22 @@ namespace RE
 		virtual ~BSBatchRenderer();  // 00
 
 		// add
-		virtual void Unk_01(void);  // 01
-		virtual void Unk_02(void);  // 02
-		virtual void Unk_03(void);  // 03
+		virtual void RegisterPass(BSRenderPass* a_pass, std::uint32_t a_technique);                                             // 01
+		virtual void RegisterPassUnsorted(BSRenderPass* a_pass, std::uint32_t a_technique);                                     // 02
+		virtual void RenderBatches(std::uint32_t a_startTechnique, std::uint32_t a_endTechnique, std::uint32_t a_renderFlags);  // 03
 
 		// members
-		BSTArray<void*>              unk008;              // 008
-		BSTHashMap<UnkKey, UnkValue> unk020;              // 020
-		std::uint64_t                unk050;              // 050
-		std::uint64_t                unk058;              // 058
-		std::uint64_t                unk060;              // 060
-		std::uint64_t                unk068;              // 068
-		GeometryGroup*               geometryGroups[16];  // 070
-		GeometryGroup*               alphaGroup;          // 0F0
-		void*                        unk0F8;              // 0F8
-		void*                        unk100;              // 100
+		BSTArray<PassGroup>                      renderPasses;         // 008
+		BSTHashMap<std::uint32_t, std::uint32_t> renderPassMap;        // 020 - techniqueId -> passIndex
+		std::uint32_t                            currentFirstPass;     // 050
+		std::uint32_t                            currentLastPass;      // 054
+		BSSimpleList<std::uint32_t>              activePassIndexList;  // 058
+		std::int32_t                             groupingAlphas;       // 068
+		bool                                     autoClearPasses;      // 06C
+		GeometryGroup*                           geometryGroups[16];   // 070
+		GeometryGroup*                           alphaGroup;           // 0F0
+		void*                                    unk0F8;               // 0F8
+		void*                                    unk100;               // 100
 	};
 	static_assert(sizeof(BSBatchRenderer) == 0x108);
 }
