@@ -24,7 +24,7 @@ namespace RE
 		{
 			kLOD0 = 0,
 			kLOD1 = 1,
-			kOpaqueDecalsMode89 = 2, // refers to depth bias mode
+			kOpaqueDecalsMode89 = 2,  // refers to depth bias mode
 			kOpaqueDecalsMode67 = 3,
 			kBlendedDecals = 4,
 			kDepth5 = 5,
